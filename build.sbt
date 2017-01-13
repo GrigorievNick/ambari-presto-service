@@ -14,7 +14,14 @@ lazy val `ambari-presto-service` = project
   .settings(
     version := "0.161",
     topLevelDirectory := Some("PRESTO"),
-    mappings in(Universal, packageBin) ++= contentOf("presto").filter(v => v._2.endsWith(target.value.getName)),
+    mappings in(Universal, packageBin) ++= {
+      println(contentOf("presto").map(_._1.getPath))
+      contentOf("presto")
+        .filter(v => v._2 != "metainfo.xml")
+        .filter(v => v._2 != "docs")
+        .filter(v => v._2 != "tests")
+        .filter(v => !v._1.getPath.startsWith("presto/target"))
+    },
     mappings in(Universal, packageBin) += {
       val buildVersion = version.value + "-build-" + sys.env.getOrElse("BUILD_NUMBER", "local")
       val content =
