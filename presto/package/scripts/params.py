@@ -34,14 +34,14 @@ host_info = config['clusterHostInfo']
 
 if 'cassandra_node_hosts' in config['clusterHostInfo'] and \
                 len(config['clusterHostInfo']['cassandra_node_hosts']) > 0:
-    cassandra_node_hosts_arr = config['clusterHostInfo']['cassandra_node_hosts']
-    cassandra_node_hosts_arr.sort()
+    cassandra_node_hosts = config['clusterHostInfo']['cassandra_node_hosts']
+    cassandra_node_hosts.sort()
     cassandra_node_hosts_arr_as_string = []
-    for cassandra_node_host in cassandra_node_hosts_arr:
+    for cassandra_node_host in cassandra_node_hosts:
         cassandra_node_hosts_arr_as_string.append(format("{cassandra_node_host}"))
     cassandra_hosts = ','.join(cassandra_node_hosts_arr_as_string)
 else:
-    cassandra_hosts = ""
+    cassandra_hosts = config['configurations']['cassandra-site']['seed_provider_parameters_seeds']
 
 hive_hosts = config['configurations']['hive-site']['hive.metastore.uris']
 

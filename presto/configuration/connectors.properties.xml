@@ -18,12 +18,7 @@
 <configuration>
   <property>
     <name>connectors.to.add</name>
-    <value>
-        {{
-        'hive': ['connector.name=hive-hadoop2', 'hive.metastore.uri={hive_hosts}'],
-        'cassandra': ['connector.name='cassandra', 'cassandra.contact-points={cassandra_hosts}', 'cassandra.consistency-level=LOCAL_QUORUM']
-        }}
-    </value>
+    <value>{{'hive': ['connector.name=hive-hadoop2', 'hive.metastore.uri={hive_hosts}'],'cassandra': ['connector.name=cassandra', 'cassandra.contact-points={cassandra_hosts}', 'cassandra.consistency-level=LOCAL_QUORUM']}}</value>
     <description>
         {hive_hosts} possible service discovery during amabari install
         {cassandra_hosts} possible service discovery during amabari install

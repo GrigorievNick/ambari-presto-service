@@ -6,3 +6,4 @@
 dist/
 ambari_presto.egg-info/
 docs/_build
+/presto/configuration/String.py
