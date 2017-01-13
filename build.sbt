@@ -19,7 +19,6 @@ lazy val `ambari-presto-service` = project
       contentOf("presto")
         .filter(v => v._2 != "metainfo.xml")
         .filter(v => v._2 != "docs")
-        .filter(v => v._2 != "tests")
         .filter(v => !v._1.getPath.startsWith("presto/target"))
     },
     mappings in(Universal, packageBin) += {
