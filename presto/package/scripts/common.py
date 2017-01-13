@@ -35,7 +35,7 @@ def create_connectors(node_properties, connectors_to_add):
         connector_file = os.path.join(node_properties['plugin.config-dir'], connector + '.properties')
         with open(connector_file, 'w') as f:
             for lineitem in connectors_dict[connector]:
-                f.write('{0}\n'.format(lineitem))
+                f.write(format('{0}\n'.format(lineitem)))
 
 def delete_connectors(node_properties, connectors_to_delete):
     if not connectors_to_delete:

@@ -18,7 +18,12 @@
 <configuration>
   <property>
     <name>connectors.to.add</name>
-    <value>{}</value>
+    <value>
+        {
+            'hive': ['connector.name=hive-hadoop2', 'hive.metastore.uri=thrift://{{hive_host}}:9083'],
+            'cassandra': ['connector.name='cassandra', 'cassandra.contact-points={{cassandra_host}}', 'cassandra.consistency-level=LOCAL_QUORUM']
+        }
+    </value>
     <description>
         Modify this property to add connectors. The format should be {'connector1':
         ['key1=value1', 'key2=value2'..], 'connector2' :['key1=value1',

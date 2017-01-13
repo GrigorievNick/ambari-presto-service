@@ -25,7 +25,8 @@ class Coordinator(Script):
     def install(self, env):
         from params import java_home
         Execute('wget --no-check-certificate {0}  -O /tmp/{1}'.format(PRESTO_RPM_URL, PRESTO_RPM_NAME))
-        Execute('export JAVA8_HOME={0} && rpm -i /tmp/{1}'.format(java_home, PRESTO_RPM_NAME))
+        #Execute('export JAVA8_HOME={0} && rpm -i /tmp/{1}'.format(java_home, PRESTO_RPM_NAME))
+        Execute('export JAVA8_HOME={0} && yum -y localinstall --nogpgcheck /tmp/{1}'.format(java_home, PRESTO_RPM_NAME))
         self.configure(env)
 
     def stop(self, env):
@@ -75,7 +76,10 @@ class Coordinator(Script):
             f.write(key_val_template.format('coordinator', 'true'))
             f.write(key_val_template.format('discovery-server.enabled', 'true'))
 
-        create_connectors(node_properties, connectors_to_add)
+        import params
+        env.set_params(params)
+
+        create_connectors(node_properties, format(connectors_to_add))
         delete_connectors(node_properties, connectors_to_delete)
         # This is a separate call because we always want the tpch connector to
         # be available because it is used to smoketest the installation.

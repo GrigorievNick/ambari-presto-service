@@ -32,5 +32,23 @@ memory_configs = ['query.max-memory-per-node', 'query.max-memory']
 
 host_info = config['clusterHostInfo']
 
+if 'cassandra_node_hosts' in config['clusterHostInfo'] and \
+                len(config['clusterHostInfo']['cassandra_node_hosts']) > 0:
+    cassandra_node_hosts_arr = config['clusterHostInfo']['cassandra_node_hosts']
+    cassandra_node_hosts_arr.sort()
+    cassandra_node_hosts_arr_as_string = []
+    for cassandra_node_host in cassandra_node_hosts_arr:
+        cassandra_node_hosts_arr_as_string.append(format("{cassandra_node_host}"))
+    cassandra_hosts = ','.join(cassandra_node_hosts_arr_as_string)
+
+if 'hive_metastore_hosts' in config['clusterHostInfo'] and \
+                len(config['clusterHostInfo']['hive_metastore_hosts']) > 0:
+    hive_metastore_hosts_arr = config['clusterHostInfo']['hive_metastore_hosts']
+    hive_metastore_hosts_arr.sort()
+    hive_metastore_hosts_arr_as_string = []
+    for hive_metastore_host in hive_metastore_hosts_arr:
+        hive_metastore_hosts_arr_as_string.append(format("{hive_metastore_host}"))
+    hive_host = hive_metastore_hosts_arr[0]
+
 host_level_params = config['hostLevelParams']
 java_home = host_level_params['java_home']
