@@ -15,6 +15,7 @@
 
 from resource_management.libraries.script.script import Script
 from resource_management import *
+import status_params
 
 # config object that holds the configurations declared in the config xml file
 config = Script.get_config()
@@ -26,7 +27,7 @@ config_properties = config['configurations']['config.properties']
 connectors_to_add = config['configurations']['connectors.properties']['connectors.to.add']
 connectors_to_delete = config['configurations']['connectors.properties']['connectors.to.delete']
 
-daemon_control_script = '/etc/init.d/presto'
+daemon_control_script = status_params.daemon_control_script
 config_directory = '/etc/presto'
 
 memory_configs = ['query.max-memory-per-node', 'query.max-memory']

@@ -37,7 +37,7 @@ class Worker(Script):
         Execute('{0} start'.format(daemon_control_script))
 
     def status(self, env):
-        from params import daemon_control_script
+        from status_params import daemon_control_script
         Execute('{0} status'.format(daemon_control_script))
 
     def configure(self, env):
