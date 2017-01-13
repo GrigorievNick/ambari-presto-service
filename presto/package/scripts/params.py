@@ -41,14 +41,7 @@ if 'cassandra_node_hosts' in config['clusterHostInfo'] and \
         cassandra_node_hosts_arr_as_string.append(format("{cassandra_node_host}"))
     cassandra_hosts = ','.join(cassandra_node_hosts_arr_as_string)
 
-if 'hive_metastore_hosts' in config['clusterHostInfo'] and \
-                len(config['clusterHostInfo']['hive_metastore_hosts']) > 0:
-    hive_metastore_hosts_arr = config['clusterHostInfo']['hive_metastore_hosts']
-    hive_metastore_hosts_arr.sort()
-    hive_metastore_hosts_arr_as_string = []
-    for hive_metastore_host in hive_metastore_hosts_arr:
-        hive_metastore_hosts_arr_as_string.append(format("{hive_metastore_host}"))
-    hive_host = hive_metastore_hosts_arr[0]
+hive_hosts = ['configurations']['hive-site']['hive.metastore.uris']
 
 if 'presto_coordinator_hosts' in config['clusterHostInfo'] and \
                 len(config['clusterHostInfo']['presto_coordinator_hosts']) > 0:
