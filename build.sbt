@@ -12,8 +12,9 @@ lazy val `ambari-presto-service` = project
   .in(file("presto"))
   .enablePlugins(UniversalPlugin)
   .settings(
+    version := "0.161",
     topLevelDirectory := Some("PRESTO"),
-    mappings in(Universal, packageBin) ++= contentOf("presto"),
+    mappings in(Universal, packageBin) ++= contentOf("presto").filter(v => v._2.endsWith(target.value.getName)),
     mappings in(Universal, packageBin) += {
       val buildVersion = version.value + "-build-" + sys.env.getOrElse("BUILD_NUMBER", "local")
       val content =
@@ -21,5 +22,5 @@ lazy val `ambari-presto-service` = project
       val templateFile = file(target.value.getAbsolutePath + "/" + metaInfoConfig)
       IO.write(templateFile, content)
       templateFile
-    } -> metaInfoConfig
+    } -> "metainfo.xml"
   )
