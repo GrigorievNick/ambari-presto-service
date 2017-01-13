@@ -15,8 +15,7 @@
 import uuid
 import os.path as path
 
-from resource_management.libraries.script.script import Script
-from resource_management.core.resources.system import Execute
+from resource_management import *
 from common import PRESTO_RPM_URL, PRESTO_RPM_NAME, create_connectors, \
     delete_connectors
 
@@ -45,6 +44,7 @@ class Worker(Script):
         from params import node_properties, jvm_config, config_properties, \
             config_directory, memory_configs, connectors_to_add, connectors_to_delete, discovery_uri, hive_hosts, \
             cassandra_hosts
+        env.set
         key_val_template = '{0}={1}\n'
 
         with open(path.join(config_directory, 'node.properties'), 'w') as f:

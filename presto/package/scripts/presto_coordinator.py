@@ -15,9 +15,7 @@
 import uuid
 import os.path as path
 
-from resource_management.libraries.script.script import Script
-from resource_management.core.resources.system import Execute
-from resource_management.core.logger import Logger
+from resource_management import *
 from common import PRESTO_RPM_URL, PRESTO_RPM_NAME, create_connectors,\
     delete_connectors
 from presto_client import smoketest_presto, PrestoClient
