@@ -66,7 +66,7 @@ class Worker(Script):
                 f.write(key_val_template.format(key, format(value)))
             f.write(key_val_template.format('coordinator', 'false'))
 
-        create_connectors(node_properties, connectors_to_add)
+        create_connectors(node_properties, format(connectors_to_add))
         delete_connectors(node_properties, connectors_to_delete)
         # This is a separate call because we always want the tpch connector to
         # be available because it is used to smoketest the installation.
