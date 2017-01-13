@@ -17,6 +17,7 @@ import os.path as path
 
 from resource_management.libraries.script.script import Script
 from resource_management.core.resources.system import Execute
+from resource_management.core.logger import Logger
 from common import PRESTO_RPM_URL, PRESTO_RPM_NAME, create_connectors,\
     delete_connectors
 from presto_client import smoketest_presto, PrestoClient
@@ -78,7 +79,8 @@ class Coordinator(Script):
 
         import params
         env.set_params(params)
-
+        print connectors_to_add
+        Logger.info("unresolved Connectors " + connectors_to_add)
         create_connectors(node_properties, connectors_to_add.format(hive_hosts = params.hive_hosts, cassandra_hosts = params.cassandra_hosts))
         delete_connectors(node_properties, connectors_to_delete)
         # This is a separate call because we always want the tpch connector to

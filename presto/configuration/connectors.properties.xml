@@ -25,6 +25,8 @@
         }}
     </value>
     <description>
+        {hive_hosts} possible service discovery during amabari install
+        {cassandra_hosts} possible service discovery during amabari install
         Modify this property to add connectors. The format should be {'connector1':
         ['key1=value1', 'key2=value2'..], 'connector2' :['key1=value1',
         'key2=value2'..]..}. Note the single quotes around each value! This example will

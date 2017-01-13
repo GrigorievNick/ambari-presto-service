@@ -16,6 +16,7 @@ import os
 import ast
 import ConfigParser
 
+from resource_management.core.logger import Logger
 from resource_management.core.resources.system import Execute
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -30,6 +31,8 @@ def create_connectors(node_properties, connectors_to_add):
     if not connectors_to_add:
         return
     Execute('mkdir -p {0}'.format(node_properties['plugin.config-dir']))
+    print connectors_to_add
+    Logger.info("resolved Connectors " + connectors_to_add)
     connectors_dict = ast.literal_eval(connectors_to_add)
     for connector in connectors_dict:
         connector_file = os.path.join(node_properties['plugin.config-dir'], connector + '.properties')

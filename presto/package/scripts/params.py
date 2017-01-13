@@ -40,6 +40,8 @@ if 'cassandra_node_hosts' in config['clusterHostInfo'] and \
     for cassandra_node_host in cassandra_node_hosts_arr:
         cassandra_node_hosts_arr_as_string.append(format("{cassandra_node_host}"))
     cassandra_hosts = ','.join(cassandra_node_hosts_arr_as_string)
+else:
+    cassandra_hosts = ""
 
 hive_hosts = config['configurations']['hive-site']['hive.metastore.uris']
 
@@ -51,6 +53,8 @@ if 'presto_coordinator_hosts' in config['clusterHostInfo'] and \
     for presto_coordinator_host in presto_coordinator_hosts:
         presto_coordinator_hosts_string.append(format("{presto_coordinator_host}"))
     discovery_uri = presto_coordinator_hosts[0]
+else:
+    discovery_uri = config['hostname']
 
 host_level_params = config['hostLevelParams']
 java_home = host_level_params['java_home']
