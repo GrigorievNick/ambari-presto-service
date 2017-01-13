@@ -55,13 +55,15 @@ class Worker(Script):
         with open(path.join(config_directory, 'jvm.config'), 'w') as f:
             f.write(jvm_config['jvm.config'])
 
+        import params
+        env.set_params(params)
         with open(path.join(config_directory, 'config.properties'), 'w') as f:
             for key, value in config_properties.iteritems():
                 if key == 'query.queue-config-file' and value.strip() == '':
                     continue
                 if key in memory_configs:
                     value += 'GB'
-                f.write(key_val_template.format(key, value))
+                f.write(key_val_template.format(key, format(value)))
             f.write(key_val_template.format('coordinator', 'false'))
 
         create_connectors(node_properties, connectors_to_add)

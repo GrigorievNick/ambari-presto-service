@@ -90,8 +90,9 @@
 
   <property require-input="true">
     <name>discovery.uri</name>
-    <value></value>
+    <value>{{discovery_uri}}</value>
     <description>
+      if set `{{discovery_uri}}` then amabari will try set here coordinator host.
       The URI to the Discovery server. Because we have enabled the embedded
       version of Discovery in the Presto coordinator, this should be the URI of
       the Presto coordinator. For example: http://master.net:8285 but make sure

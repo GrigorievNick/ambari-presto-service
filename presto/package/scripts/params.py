@@ -50,5 +50,14 @@ if 'hive_metastore_hosts' in config['clusterHostInfo'] and \
         hive_metastore_hosts_arr_as_string.append(format("{hive_metastore_host}"))
     hive_host = hive_metastore_hosts_arr[0]
 
+if 'presto_coordinator_hosts' in config['clusterHostInfo'] and \
+                len(config['clusterHostInfo']['presto_coordinator_hosts']) > 0:
+    presto_coordinator_hosts = config['clusterHostInfo']['presto_coordinator_hosts']
+    presto_coordinator_hosts.sort()
+    presto_coordinator_hosts_string = []
+    for presto_coordinator_host in presto_coordinator_hosts:
+        presto_coordinator_hosts_string.append(format("{presto_coordinator_host}"))
+    discovery_uri = presto_coordinator_hosts[0]
+
 host_level_params = config['hostLevelParams']
 java_home = host_level_params['java_home']
