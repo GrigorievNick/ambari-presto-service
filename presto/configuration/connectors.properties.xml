@@ -19,10 +19,10 @@
   <property>
     <name>connectors.to.add</name>
     <value>
-        {
-            'hive': ['connector.name=hive-hadoop2', 'hive.metastore.uri={hive_hosts}'],
-            'cassandra': ['connector.name='cassandra', 'cassandra.contact-points={cassandra_hosts}', 'cassandra.consistency-level=LOCAL_QUORUM']
-        }
+        {{
+        'hive': ['connector.name=hive-hadoop2', 'hive.metastore.uri={hive_hosts}'],
+        'cassandra': ['connector.name='cassandra', 'cassandra.contact-points={cassandra_hosts}', 'cassandra.consistency-level=LOCAL_QUORUM']
+        }}
     </value>
     <description>
         Modify this property to add connectors. The format should be {'connector1':

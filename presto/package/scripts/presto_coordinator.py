@@ -79,7 +79,7 @@ class Coordinator(Script):
         import params
         env.set_params(params)
 
-        create_connectors(node_properties, format(connectors_to_add))
+        create_connectors(node_properties, connectors_to_add.format(hive_hosts = params.hive_hosts, cassandra_hosts = params.cassandra_hosts))
         delete_connectors(node_properties, connectors_to_delete)
         # This is a separate call because we always want the tpch connector to
         # be available because it is used to smoketest the installation.
