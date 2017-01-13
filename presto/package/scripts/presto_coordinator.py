@@ -55,7 +55,8 @@ class Coordinator(Script):
 
     def configure(self, env):
         from params import node_properties, jvm_config, config_properties, \
-            config_directory, memory_configs, host_info, connectors_to_add, connectors_to_delete
+            config_directory, memory_configs, host_info, connectors_to_add, connectors_to_delete, discovery_uri, \
+            cassandra_hosts, hive_hosts
         key_val_template = '{0}={1}\n'
 
         with open(path.join(config_directory, 'node.properties'), 'w') as f:
@@ -73,15 +74,13 @@ class Coordinator(Script):
                     continue
                 if key in memory_configs:
                     value += 'GB'
-                f.write(key_val_template.format(key, value))
+                f.write(key_val_template.format(key, format(value)))
             f.write(key_val_template.format('coordinator', 'true'))
             f.write(key_val_template.format('discovery-server.enabled', 'true'))
 
-        import params
-        env.set_params(params)
         print connectors_to_add
         Logger.info("unresolved Connectors " + connectors_to_add)
-        create_connectors(node_properties, connectors_to_add.format(hive_hosts = params.hive_hosts, cassandra_hosts = params.cassandra_hosts))
+        create_connectors(node_properties, connectors_to_add.format(hive_hosts = hive_hosts, cassandra_hosts = cassandra_hosts))
         delete_connectors(node_properties, connectors_to_delete)
         # This is a separate call because we always want the tpch connector to
         # be available because it is used to smoketest the installation.

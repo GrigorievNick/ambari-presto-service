@@ -43,7 +43,8 @@ class Worker(Script):
 
     def configure(self, env):
         from params import node_properties, jvm_config, config_properties, \
-            config_directory, memory_configs, connectors_to_add, connectors_to_delete
+            config_directory, memory_configs, connectors_to_add, connectors_to_delete, discovery_uri, hive_hosts, \
+            cassandra_hosts
         key_val_template = '{0}={1}\n'
 
         with open(path.join(config_directory, 'node.properties'), 'w') as f:
@@ -55,8 +56,6 @@ class Worker(Script):
         with open(path.join(config_directory, 'jvm.config'), 'w') as f:
             f.write(jvm_config['jvm.config'])
 
-        import params
-        env.set_params(params)
         with open(path.join(config_directory, 'config.properties'), 'w') as f:
             for key, value in config_properties.iteritems():
                 if key == 'query.queue-config-file' and value.strip() == '':
@@ -66,7 +65,7 @@ class Worker(Script):
                 f.write(key_val_template.format(key, format(value)))
             f.write(key_val_template.format('coordinator', 'false'))
 
-        create_connectors(node_properties, connectors_to_add.format(hive_hosts = params.hive_hosts, cassandra_hosts = params.cassandra_hosts))
+        create_connectors(node_properties, connectors_to_add.format(hive_hosts = hive_hosts, cassandra_hosts = cassandra_hosts))
         delete_connectors(node_properties, connectors_to_delete)
         # This is a separate call because we always want the tpch connector to
         # be available because it is used to smoketest the installation.
