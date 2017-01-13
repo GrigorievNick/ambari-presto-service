@@ -53,7 +53,7 @@ if 'presto_coordinator_hosts' in config['clusterHostInfo'] and \
     presto_coordinator_hosts_string = []
     for presto_coordinator_host in presto_coordinator_hosts:
         presto_coordinator_hosts_string.append(format("{presto_coordinator_host}"))
-    discovery_uri = presto_coordinator_hosts[0]
+    discovery_uri = "http://" + presto_coordinator_hosts[0] + ":" + config_properties['http-server.http.port']
 else:
     discovery_uri = config['hostname']
 
