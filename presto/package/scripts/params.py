@@ -41,7 +41,7 @@ if 'cassandra_node_hosts' in config['clusterHostInfo'] and \
         cassandra_node_hosts_arr_as_string.append(format("{cassandra_node_host}"))
     cassandra_hosts = ','.join(cassandra_node_hosts_arr_as_string)
 
-hive_hosts = ['configurations']['hive-site']['hive.metastore.uris']
+hive_hosts = config['configurations']['hive-site']['hive.metastore.uris']
 
 if 'presto_coordinator_hosts' in config['clusterHostInfo'] and \
                 len(config['clusterHostInfo']['presto_coordinator_hosts']) > 0:
