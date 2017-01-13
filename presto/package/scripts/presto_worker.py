@@ -44,7 +44,6 @@ class Worker(Script):
         from params import node_properties, jvm_config, config_properties, \
             config_directory, memory_configs, connectors_to_add, connectors_to_delete, discovery_uri, hive_hosts, \
             cassandra_hosts
-        env.set
         key_val_template = '{0}={1}\n'
 
         with open(path.join(config_directory, 'node.properties'), 'w') as f:
